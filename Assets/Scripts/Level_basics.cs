@@ -5,17 +5,17 @@ public class Level_basics : MonoBehaviour {
 	
 	public Transform prefab;
 	public int numberOfObjects;
-	
+
 	public float lengthOffset;
 	public float recycleOffset;
-	
+
 	public Vector3 startPosition;
 	
-	
+
 	private Vector3 nextPosition;
 	private Queue<Transform> objectQueue;
-	
-	
+    
+
 	void Start () {
 		objectQueue = new Queue<Transform>(numberOfObjects);
 		for(int i = 0; i < numberOfObjects; i++){

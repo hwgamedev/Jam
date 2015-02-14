@@ -15,17 +15,23 @@ public class Destroy : MonoBehaviour {
 
 	}
 
-	void OnTriggerEnter(Collider obj){
-
-		if(FloorManager.current.pool.isPooled(obj.gameObject))
+	void OnTriggerEnter(Collider obj)
+	{
+		Debug.Log ("Destroy");
+		foreach (ObjectPooler pool in ObstacleManager.current.pools) 
 		{
-				Debug.Log("Floor");
-				FloorManager.current.floor.RemoveFirst();
-				FloorManager.current.pool.DestroyObject (obj.gameObject);
-				FloorManager.current.floorCount--;
-		}else{
-			Destroy(obj.gameObject);
+			if(pool.isPooled(obj.gameObject))
+			{
+				Debug.Log("Obstacle");
+				ObstacleManager.current.obstacles.RemoveFirst();
+				pool.DestroyObject (obj.gameObject);
+				ObstacleManager.current.obstacleCount--;
+			}else{
+				//Destroy(obj.gameObject);
+			}
+
 		}
+
 
 	}
 }
