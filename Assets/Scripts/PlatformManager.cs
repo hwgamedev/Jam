@@ -7,7 +7,7 @@ public class PlatformManager : MonoBehaviour {
 	public int numberOfObjects;
 	public float recycleOffset;
 	public Vector3 startPosition;
-	public Vector3 minSize, maxSize, minGap, maxGap;
+
 	public float minY, maxY;
 	
 	private Vector3 nextPosition;
@@ -20,16 +20,16 @@ public class PlatformManager : MonoBehaviour {
 		}
 		nextPosition = startPosition;
 		for(int i = 0; i < numberOfObjects; i++){
-			Recycle();
+			//Recycle();
 		}
 	}
 	
 	void Update () {
-		if(objectQueue.Peek().localPosition.x + recycleOffset < Runner.distanceTraveled){
-			Recycle();
+		if(objectQueue.Peek().localPosition.z + recycleOffset < PlayerControl.distanceTraveled){
+			//Recycle();
 		}
 	}
-	
+	/*
 	private void Recycle () {
 		Vector3 scale = new Vector3(
 			Random.Range(minSize.x, maxSize.x),
@@ -56,5 +56,5 @@ public class PlatformManager : MonoBehaviour {
 		else if(nextPosition.y > maxY){
 			nextPosition.y = maxY - maxGap.y;
 		}
-	}
+	}*/
 }
