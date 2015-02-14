@@ -6,8 +6,9 @@ public class ObjectPooler : MonoBehaviour {
 
 	public static ObjectPooler current;
 	public GameObject pooledObject;
-	public int pooledAmount = 20;
-	public bool willGrow = true;
+	public int pooledAmount = 5;
+	public bool willGrow = false;
+
 
 	List<GameObject> pooledObjects;
 
@@ -31,7 +32,7 @@ public class ObjectPooler : MonoBehaviour {
 		{
 			if(!pooledObjects[i].activeInHierarchy)
 			{
-				pooledObjects[i].transform.position = position;
+				pooledObjects[i].transform.position = new Vector3(pooledObject.transform.position.x + position.x, position.y, position.z);
 				pooledObjects[i].transform.rotation = rotation;
 				pooledObjects[i].SetActive(setActive);
 				return pooledObjects[i];
