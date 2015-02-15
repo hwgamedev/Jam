@@ -16,6 +16,8 @@ public class PlayerControl : MonoBehaviour {
 	public int angle = 30;
 	public Slider slider;
 	public Animator anim;
+	public CapsuleCollider[] col;
+	Vector3 colSize;
 	bool collided = false;
 	Vector2 v2_current_position;
 	Vector2 v2_previous_position;
@@ -27,6 +29,8 @@ public class PlayerControl : MonoBehaviour {
 	{
 		player = this.transform;
 		anim = GetComponent<Animator> ();
+		col = gameObject.GetComponents<CapsuleCollider> ();
+
 	}
 	// Use this for initialization
 	void Start () {
@@ -91,13 +95,13 @@ public class PlayerControl : MonoBehaviour {
 	{
 
 		player.eulerAngles = new Vector3(0f, 180 + angle, 0f);
-		player.Translate(laneSwap * value * Time.deltaTime, 0, 0);
+		player.Translate(laneSwap * -value * Time.deltaTime, 0, 0);
 	}
 
 	void OnTiltLeft(float value)
 	{
 		player.eulerAngles = new Vector3(0f, 180 - angle, 0f);
-		player.Translate(laneSwap * value * Time.deltaTime, 0, 0);
+		player.Translate(laneSwap * -value * Time.deltaTime, 0, 0);
 	}
 
 	void OriginalRotation()
@@ -114,6 +118,22 @@ public class PlayerControl : MonoBehaviour {
 	{
 		//play animation
 		anim.SetTrigger ("Slide");
+		foreach (CapsuleCollider c in col)
+		{
+			c.height -= 1;
+			c.center = new Vector3(0, 1, 0);
+		}
+		StartCoroutine ("SlideFinish");
+	}
+
+	IEnumerator SlideFinish()
+	{
+		yield return new WaitForSeconds(1.3f);
+		foreach (CapsuleCollider c in col)
+		{
+			c.height += 1;
+			c.center = new Vector3(0, 1.5f, 0);
+		}
 	}
 
 	void FixedUpdate()
@@ -125,19 +145,18 @@ public class PlayerControl : MonoBehaviour {
 
 	void increaseSpeed()
 	{
-		if (!collided)
-		{
+
 			if (moveSpeed > maxSpeed)
 				moveSpeed = maxSpeed;
 			else
 			moveSpeed += Time.deltaTime;
-		}
+
 	}
 	public void Hit(int value)
 	{
 		moveSpeed -= value;
 		if (moveSpeed <= 0)
-			moveSpeed = 0;
+			moveSpeed = 1;
 	}
 
 
