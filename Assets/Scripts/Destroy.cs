@@ -22,16 +22,29 @@ public class Destroy : MonoBehaviour {
 		{
 			if(pool.isPooled(obj.gameObject))
 			{
-				Debug.Log("Obstacle");
-				ObstacleManager.current.obstacles.RemoveFirst();
-				pool.DestroyObject (obj.gameObject);
-				ObstacleManager.current.obstacleCount--;
+				if(obj.tag == "Obstacle")
+				{
+					Debug.Log("Obstacle");
+					ObstacleManager.current.obstacles.RemoveFirst();
+					pool.DestroyObject (obj.gameObject);
+					ObstacleManager.current.obstacleCount--;
+				}
+
 			}else{
 				//Destroy(obj.gameObject);
 			}
 
 		}
-
-
+		if(obj.tag == "Coin")
+		{
+			Debug.Log("Coin");
+			CoinManager.current.coins.RemoveFirst();
+			CoinManager.current.pool.DestroyObject (obj.gameObject);
+			CoinManager.current.coinCount--;
+			if(this.gameObject.tag == "Player")
+			ScoreManager.score += 50;
+		}
+		
+		
 	}
 }
