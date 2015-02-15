@@ -65,4 +65,8 @@ public class ObjectPooler : MonoBehaviour {
 		obj.SetActive (false);
 	}
 
+	public int getCount(){
+		return pooledObjects.Count;
+	}
+
 }

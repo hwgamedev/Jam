@@ -120,10 +120,19 @@ public class Enemy_control : MonoBehaviour {
 		return angle;
 	}
 
-	public void tryDestroy(GameObject obj){
+	public void tryDestroy(GameObject obj, string keyword){
 		int l = pools.Length;
+
 		for (int i=0 ; i<l;i++){
-			pools[i].DestroyObject(obj);
+			if (pools[i].pooledObject.name.Contains(keyword)){
+				int k=pools[i].getCount();
+				pools[i].DestroyObject(obj);
+			}
+
+		}
+
+		if (obj.name.Contains("Enemy")){
+			enemiesCount--;
 		}
 	}
 }

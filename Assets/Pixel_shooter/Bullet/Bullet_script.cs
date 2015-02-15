@@ -17,12 +17,13 @@ public class Bullet_script : MonoBehaviour {
 		// Destroy the bullet 
 		Shooter_control sc = Shooter_control.current;
 		sc.tryDestroy (gameObject);
-		sc.bulletCount--;
+		sc.bulletCount-- ;
 	}
 
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.name.Contains ("Shooter") == false) {
-			Enemy_control.current.tryDestroy (gameObject);
+			Enemy_control.current.tryDestroy (collision.gameObject,"Enemy");
+			Shooter_control.current.tryDestroy(gameObject);
 		}
 	}
 
