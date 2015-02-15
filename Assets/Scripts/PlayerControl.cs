@@ -15,6 +15,7 @@ public class PlayerControl : MonoBehaviour {
 	public int i_comfort = 0;
 	public int angle = 30;
 	public Slider slider;
+	public Animator anim;
 	bool collided = false;
 	Vector2 v2_current_position;
 	Vector2 v2_previous_position;
@@ -25,6 +26,7 @@ public class PlayerControl : MonoBehaviour {
 	void Awake()
 	{
 		player = this.transform;
+		anim = GetComponent<Animator> ();
 	}
 	// Use this for initialization
 	void Start () {
@@ -88,19 +90,19 @@ public class PlayerControl : MonoBehaviour {
 	void OnTiltRight(float value)
 	{
 
-		player.eulerAngles = new Vector3(0f, angle, 0f);
+		player.eulerAngles = new Vector3(0f, 180 + angle, 0f);
 		player.Translate(laneSwap * value * Time.deltaTime, 0, 0);
 	}
 
 	void OnTiltLeft(float value)
 	{
-		player.eulerAngles = new Vector3(0f, -angle, 0f);
+		player.eulerAngles = new Vector3(0f, 180 - angle, 0f);
 		player.Translate(laneSwap * value * Time.deltaTime, 0, 0);
 	}
 
 	void OriginalRotation()
 	{
-		player.eulerAngles = new Vector3(0f, 0f, 0f);
+		player.eulerAngles = new Vector3(0f, 180f, 0f);
 	}
 
 	void OnSwipeUp()
@@ -111,13 +113,14 @@ public class PlayerControl : MonoBehaviour {
 	void OnSwipeDown()
 	{
 		//play animation
+		anim.SetTrigger ("Slide");
 	}
 
 	void FixedUpdate()
 	{
 		distanceTraveled = transform.localPosition.z;
 		increaseSpeed ();
-		player.Translate (0, 0, moveSpeed * Time.deltaTime);
+		player.Translate (0, 0, -moveSpeed * Time.deltaTime);
 	}
 
 	void increaseSpeed()
