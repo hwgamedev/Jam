@@ -111,7 +111,9 @@ public class PlayerControl : MonoBehaviour {
 
 	void OnSwipeUp()
 	{
+
 		player.rigidbody.AddForce (new Vector3(0,jumpForce));
+		anim.SetTrigger ("Jump");
 	}
 
 	void OnSwipeDown()
