@@ -12,7 +12,7 @@ GameObject:
   - 65: {fileID: 6537304}
   - 23: {fileID: 2337304}
   - 54: {fileID: 5431768}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wall Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ GameObject:
   - 33: {fileID: 3337306}
   - 65: {fileID: 6537306}
   - 23: {fileID: 2337306}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   - 65: {fileID: 6537308}
   - 23: {fileID: 2337308}
   - 54: {fileID: 5495568}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wall Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,6 +64,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 437310}
+  - 23: {fileID: 2342052}
   m_Layer: 0
   m_Name: Basic
   m_TagString: Untagged
@@ -175,6 +176,26 @@ Renderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: d3c2624115b81c34d8c4e503bc1df908, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!23 &2342052
+Renderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137310}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 5edafd71514f18247a3f46191d07e482, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
