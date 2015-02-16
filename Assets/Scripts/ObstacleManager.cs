@@ -34,6 +34,7 @@ public class ObstacleManager : MonoBehaviour {
 				type = getType ();
 				Transform obstacle = pools[type].GetPooledObject(startPosition + nextPosition, Quaternion.identity, true).transform;
 				nextPosition.z += 10f;
+				nextPosition.y = -1f;
 				obstacles.AddLast(obstacle);
 				obstacleCount ++;
 			}

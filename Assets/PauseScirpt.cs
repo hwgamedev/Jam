@@ -20,5 +20,6 @@ public class PauseScirpt : MonoBehaviour {
 	public void Restart()
 	{
 		Application.LoadLevel (Application.loadedLevel);
+		Time.timeScale = 1;
 	}
 }

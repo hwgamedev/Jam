@@ -4,6 +4,7 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
 
+	public static PlayerControl current;
 	public Transform player;
 	public float moveSpeed = 5f;
 	public float maxSpeed = 10;
@@ -27,6 +28,7 @@ public class PlayerControl : MonoBehaviour {
 
 	void Awake()
 	{
+		current = this;
 		player = this.transform;
 		anim = GetComponent<Animator> ();
 		col = gameObject.GetComponents<CapsuleCollider> ();
@@ -137,12 +139,23 @@ public class PlayerControl : MonoBehaviour {
 			c.center = new Vector3(0, 1.5f, 0);
 		}
 	}
-
+	bool h = true;
 	void FixedUpdate()
 	{
 		distanceTraveled = transform.localPosition.z;
 		increaseSpeed ();
-		player.Translate (0, 0, -moveSpeed * Time.deltaTime);
+		player.Translate (0, 0, -moveSpeed * Time.deltaTime * 2);
+		if (h)
+			StartCoroutine ("AddHealth");
+	}
+
+	IEnumerator AddHealth()
+	{
+		h = false;
+		yield return new WaitForSeconds(4f);
+		PlayerControl.current.playerHealth += 1;
+		h = true;
+
 	}
 
 	void increaseSpeed()
@@ -156,6 +169,7 @@ public class PlayerControl : MonoBehaviour {
 	}
 	public void Hit(int value)
 	{
+		PlayerControl.current.playerHealth -= 1;
 		moveSpeed -= value;
 		if (moveSpeed <= 0)
 			moveSpeed = 1;
